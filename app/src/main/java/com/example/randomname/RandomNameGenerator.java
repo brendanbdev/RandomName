@@ -5,8 +5,6 @@ import java.util.Random;
 import java.lang.StringBuilder;
 
 public class RandomNameGenerator {
-    private static ArrayList<String> randomNameArrayList = new ArrayList<>();
-    private static StringBuilder randomNameStringBuilder = new StringBuilder();
     private static Random random = new Random();
     private static String[] possibleFirstLetters = {"A", "E", "I", "O", "U", "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "R", "S", "T", "V", "W", "X", "Z", "Ch", "Ph", "Th", "Sh"};
     private static String[] vowels = {"a", "e", "i", "o", "u"};
@@ -20,9 +18,16 @@ public class RandomNameGenerator {
     private static int MIN_MAX_BOUND = 4;
     //There is a 1 in 2 chance that a special ending will be added if the name's length is 4.
     private static int PROBABILITY_OF_SPECIAL_ENDING = 2;
-    private static int LATEST_INDEX = randomNameArrayList.size() - 1;
 
-    public static String getRandomName() {
+    private ArrayList<String> randomNameArrayList;
+    private StringBuilder randomNameStringBuilder;
+
+    public RandomNameGenerator() {
+        randomNameArrayList = new ArrayList<>();
+        randomNameStringBuilder = new StringBuilder();
+    }
+
+    public String getRandomName() {
 
         //Reset the Array List and String Builder
         randomNameArrayList.clear();
@@ -56,7 +61,8 @@ public class RandomNameGenerator {
             }
         }
 
-        if (nameLength == MIN_MAX_BOUND && letterAtIndexIsAConsonant(LATEST_INDEX) && shouldAddSpecialEnding()) {
+        int last_index = randomNameArrayList.size() - 1;
+        if (nameLength == MIN_MAX_BOUND && letterAtIndexIsAConsonant(last_index) && shouldAddSpecialEnding()) {
             addLetterFrom(possibleEndOfName);
         }
 
@@ -65,31 +71,27 @@ public class RandomNameGenerator {
         return randomNameStringBuilder.toString();
     }
 
-    private static boolean shouldAddSpecialEnding() {
-        return random.nextInt(PROBABILITY_OF_SPECIAL_ENDING) == 0;
-    }
-
-    private static boolean letterAtIndexEquals(int index, String letter) {
+    private boolean letterAtIndexEquals(int index, String letter) {
         return randomNameArrayList.get(index).equalsIgnoreCase(letter);
     }
 
-    private static boolean lastLetterIs(String letter) {
+    private boolean lastLetterIs(String letter) {
         return randomNameArrayList.get(randomNameArrayList.size() - 1).equalsIgnoreCase(letter);
     }
 
-    private static boolean secondToLastLetterIsAConsonant() {
+    private boolean secondToLastLetterIsAConsonant() {
         return letterAtIndexIsAConsonant(randomNameArrayList.size() - 2);
     }
 
-    private static boolean firstLetterIsAVowel() {
+    private boolean firstLetterIsAVowel() {
         return letterAtIndexIsAVowel(0);
     }
 
-    private static boolean lastLetterIsAVowel() {
+    private boolean lastLetterIsAVowel() {
         return letterAtIndexIsAVowel(randomNameArrayList.size() - 1);
     }
 
-    private static boolean letterAtIndexIsAVowel(int index) {
+    private boolean letterAtIndexIsAVowel(int index) {
         for (String vowel : vowels) {
             if (letterAtIndexEquals(index, vowel)) {
                 return true;
@@ -98,7 +100,7 @@ public class RandomNameGenerator {
         return false;
     }
 
-    private static boolean letterAtIndexIsAConsonant(int index) {
+    private boolean letterAtIndexIsAConsonant(int index) {
         for (String consonant : consonants) {
             if (letterAtIndexEquals(index, consonant)) {
                 return true;
@@ -107,7 +109,11 @@ public class RandomNameGenerator {
         return false;
     }
 
-    private static void addLetterFrom(String[] options) {
+    private void addLetterFrom(String[] options) {
         randomNameArrayList.add(options[random.nextInt(options.length)]);
+    }
+
+    private static boolean shouldAddSpecialEnding() {
+        return random.nextInt(PROBABILITY_OF_SPECIAL_ENDING) == 0;
     }
 }

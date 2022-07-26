@@ -31,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.randomNameButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                randomNameTextView.setText(RandomNameGenerator.getRandomName());
+                RandomNameGenerator randomNameGenerator = new RandomNameGenerator();
+                String randomName = randomNameGenerator.getRandomName();
+
+                randomNameTextView.setText(randomName);
             }
         });
 
