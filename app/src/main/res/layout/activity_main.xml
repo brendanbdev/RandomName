@@ -6,26 +6,25 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".MainActivity">
+
     <TextView
-        android:id="@+id/random_name_text_view"
+        android:id="@+id/randomNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
+        android:freezesText="true"
         android:textColor="@color/black"
         android:textSize="32sp"
-        android:freezesText="true"
-        app:layout_constraintBottom_toTopOf="@id/random_name_button"
+        app:layout_constraintBottom_toTopOf="@id/randomNameButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/adViewMainBanner" />
 
     <Button
-        android:id="@+id/random_name_button"
+        android:id="@+id/randomNameButton"
         style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
-        android:layout_height="72dp"
+        android:layout_height="80dp"
         android:backgroundTint="@color/black"
         android:clickable="true"
         android:fontFamily="sans-serif-light"
@@ -37,28 +36,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/random_name_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/randomNameTextView" />
 
     <Button
-        android:id="@+id/nav_to_saved_names"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:backgroundTint="@color/white"
-        android:clickable="true"
-        android:outlineAmbientShadowColor="#00FFFFFF"
-        android:outlineProvider="none"
-        android:outlineSpotShadowColor="#00FFFFFF"
-        android:text="@string/nav_to_saved_names_text"
-        android:textColor="#000000"
-        android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/save_button"
+        android:id="@+id/saveButton"
         style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
-        android:layout_height="96dp"
+        android:layout_height="80dp"
         android:backgroundTint="#00FFFFFF"
         android:clickable="true"
         android:fontFamily="sans-serif-light"
@@ -69,6 +53,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/random_name_button" />
+        app:layout_constraintTop_toBottomOf="@+id/randomNameButton" />
+
+    <ImageView
+        android:id="@+id/navToSavedNames"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/nav_to_saved_names_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/adViewMainBanner"
+        app:srcCompat="@drawable/outline_navigate_next_black_18" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewMainBanner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

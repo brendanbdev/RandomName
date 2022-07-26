@@ -7,8 +7,11 @@
         <entry key="..\:/Users/brend/AndroidStudioProjects/RandomName/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2595" />
         <entry key="..\:/Users/brend/AndroidStudioProjects/RandomName/app/src/main/res/drawable/icons.xml" value="0.2595" />
         <entry key="..\:/Users/brend/AndroidStudioProjects/RandomName/app/src/main/res/drawable/outline_navigate_next_24.xml" value="0.2595" />
+        <entry key="..\:/Users/brend/AndroidStudioProjects/RandomName/app/src/main/res/drawable/select.xml" value="0.133" />
+        <entry key="..\:/Users/brend/AndroidStudioProjects/RandomName/app/src/main/res/drawable/select_list_item.xml" value="0.2505" />
         <entry key="..\:/Users/brend/AndroidStudioProjects/RandomName/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/brend/AndroidStudioProjects/RandomName/app/src/main/res/layout/name_list_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/brend/AndroidStudioProjects/RandomName/app/src/main/res/layout/name_list_item.xml" value="0.264" />
+        <entry key="..\:/Users/brend/AndroidStudioProjects/RandomName/app/src/main/res/layout/name_list_item2.xml" value="0.264" />
         <entry key="..\:/Users/brend/AndroidStudioProjects/RandomName/app/src/main/res/layout/saved_names.xml" value="0.25416666666666665" />
       </map>
     </option>

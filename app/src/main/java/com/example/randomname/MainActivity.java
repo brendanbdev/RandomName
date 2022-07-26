@@ -1,7 +1,6 @@
 package com.example.randomname;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,43 +9,38 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 public class MainActivity extends AppCompatActivity {
-    TextView randomNameTextView;
-    Button save_button;
-    String currentRandomName;
-    static String[] names = {"Rob", "Slob", "Bob", "Cob", "Brendan", "Courtney", "Adam", "Gary", "Steve", "Carl", "Jimmy", "Sheen", "Shane",
-        "Sam", "Carmelita", "Sly", "Murray", "Bentley", "Steve-o", "Steve Jobs", "Jeff", "Smeff", "Streff", "Kleft", "Smleft", "Streltft",
-        "Smrakelpft", "Pete", "John", "Johnny", "Jon", "Johnathan", "Jonathan", "Jonnythan", "Joe", "Mama", "Got 'em", "Alex"};
-
-    public static String[] getNames() {
-        return names;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-        randomNameTextView = findViewById(R.id.random_name_text_view);
-        save_button = findViewById(R.id.save_button);
+        //button declarations
+        TextView randomNameTextView = findViewById(R.id.randomNameTextView);
+        Button save_button = findViewById(R.id.saveButton);
 
-        findViewById(R.id.random_name_button).setOnClickListener(new View.OnClickListener() {
+        //Button that calls RandomNameGenerator to generate a random name.
+        findViewById(R.id.randomNameButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 randomNameTextView.setText(RandomNameGenerator.getRandomName());
             }
         });
 
+        //Button to save the name that is currently displaying, to the SQLite database.
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SavedNameModel savedNameModel;
                 if (!randomNameTextView.getText().toString().isEmpty()) {
-                    savedNameModel = new SavedNameModel(-1, randomNameTextView.getText().toString());
+                    SavedNameModel savedNameModel = new SavedNameModel(-1, randomNameTextView.getText().toString());
                     DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
                     boolean success = databaseHelper.addOne(savedNameModel);
                     if (success) {
@@ -60,37 +54,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.nav_to_saved_names).setOnClickListener(new View.OnClickListener() {
+        //Button to navigate to SavedNamesActivity, which is the saved names screen.
+        findViewById(R.id.navToSavedNames).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SavedNamesActivity.class);
                 startActivity(intent);
             }
         });
+
+        //Ad on main screen.
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdView adView_main_banner = (AdView)findViewById(R.id.adViewMainBanner);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView_main_banner.loadAd(adRequest);
     }
-
-/*
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putString("RandomNameState", currentRandomName);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        currentRandomName = savedInstanceState.getString("RandomNameState");
-    }
-
-*/
-
 }
-
-/*
-
-    This is how you tag:
-    First: private static final String TAG = GreenAdapter.class.getSimpleName();
-    Second: Log.d(TAG, "message");
-
-*/

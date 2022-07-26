@@ -5,26 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/nav_to_main"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:backgroundTint="@color/white"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSavedNames"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivToDeleteAll" />
+
+    <ImageView
+        android:id="@+id/ivToDeleteAll"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
         android:clickable="true"
-        android:outlineAmbientShadowColor="#00FFFFFF"
-        android:outlineProvider="none"
-        android:outlineSpotShadowColor="#00FFFFFF"
-        android:text="@string/nav_to_main_text"
-        android:textColor="#000000"
-        android:textSize="32sp"
+        android:contentDescription="@string/iv_to_delete_all_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adViewSavedNamesBanner"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        app:tint="@color/black" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewSavedNamesBanner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_saved_names"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nav_to_main" />
+    <ImageView
+        android:id="@+id/ivNavToMainActivity"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:rotation="180"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adViewSavedNamesBanner"
+        app:srcCompat="@drawable/outline_navigate_next_black_48" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

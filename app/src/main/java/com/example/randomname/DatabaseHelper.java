@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, "name.sqLiteDatabase", null, 1);
     }
 
-    //this is called the first time a database is accessed. There should be code in here to create a new database.
+    //This is called the first time a database is accessed. There should be code in here to create a new database.
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createTableStatement = "CREATE TABLE " + NAME_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " TEXT)";
@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createTableStatement);
     }
 
-    //this is called if the database version changes. It prevents previous users apps from breaking when you change the database design.
+    //This is called if the database version changes. It prevents previous users apps from breaking when you change the database design.
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
@@ -68,12 +68,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         else {
-            //Failure. Do nothing.
+            //Do nothing.
         }
 
         cursor.close();
         sqLiteDatabase.close();
 
         return returnList;
+    }
+
+    public boolean delete(SavedNameModel savedNameModel) {
+        /*
+        Find customerModel in the database.
+        If it is found, delete it and return true.
+        If it is not, return false.
+        */
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + NAME_TABLE + " WHERE " + COLUMN_ID + " = " + savedNameModel.getId();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean deleteAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + "CUSTOMER_TABLE";
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -5,48 +5,46 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class NameAdapter extends RecyclerView.Adapter<NameAdapter.ViewHolder> {
-
-    private static final String TAG = NameAdapter.class.getSimpleName();
+public class NameAdapter extends RecyclerView.Adapter<NameAdapter.MyViewHolder> {
 
     Context context;
+    List<SavedNameModel> listOfNames;
 
-    String[] listOfNames;
-
-    public NameAdapter(Context context, String[] listOfNames) {
+    public NameAdapter( List<SavedNameModel> listOfNames, Context context) {
         this.context = context;
         this.listOfNames = listOfNames;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.name_list_item, viewGroup, false);
-
-        return new NameAdapter.ViewHolder(view);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.name_list_item, parent, false);
+        MyViewHolder holder = new MyViewHolder(view);
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.savedNameTextView.setText(listOfNames[position]);
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        holder.savedNameTextView.setText(listOfNames.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return listOfNames.length;
+        return listOfNames.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-
+    class MyViewHolder extends RecyclerView.ViewHolder {
         TextView savedNameTextView;
 
-        public ViewHolder(View view) {
-            super(view);
-            savedNameTextView = view.findViewById(R.id.tv_saved_name);
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            savedNameTextView = itemView.findViewById(R.id.tvSavedName);
         }
     }
 }

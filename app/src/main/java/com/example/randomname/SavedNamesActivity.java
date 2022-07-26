@@ -1,51 +1,104 @@
 package com.example.randomname;
 
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import java.util.ArrayList;
+
 import java.util.List;
 
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SavedNamesActivity extends AppCompatActivity{
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
-    RecyclerView rv_saved_names;
+public class SavedNamesActivity extends AppCompatActivity {
 
-    ArrayList<String> namesArrayList = new ArrayList<String>();
-
-//    String[] listOfNames = MainActivity.getNames();
+    private static DatabaseHelper databaseHelper;
+    private static List<SavedNameModel> everySavedName;
+    //The adapter is for the Recycler View.
+    private static NameAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_names);
-        DatabaseHelper databaseHelper = new DatabaseHelper(SavedNamesActivity.this);
-        List<SavedNameModel> everySavedName = databaseHelper.getAllNames();
-        for (int i = 0; i < everySavedName.size(); i++) {
-            namesArrayList.add(everySavedName.get(i).toString());
-        }
-        String[] namesArray = namesArrayList.toArray(new String[0]);
-        rv_saved_names = findViewById(R.id.rv_saved_names);
-        NameAdapter adapter = new NameAdapter(this, namesArray);
-        rv_saved_names.setAdapter(adapter);
-        rv_saved_names.setLayoutManager(new LinearLayoutManager(this));
 
-        findViewById(R.id.nav_to_main).setOnClickListener(new View.OnClickListener() {
+        //For the SQLite Database.
+        databaseHelper = new DatabaseHelper(SavedNamesActivity.this);
+        everySavedName = databaseHelper.getAllNames();
+
+        //For the Recycler View.
+        RecyclerView rv_saved_names = findViewById(R.id.rvSavedNames);
+        rv_saved_names.setHasFixedSize(false);
+        rv_saved_names.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new NameAdapter(everySavedName, this);
+        rv_saved_names.setAdapter(adapter);
+
+        //This is an animation for swiping individual names off of the list and consequentially deleting them from the SQLite database.
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int positionOfItemToDelete = viewHolder.getBindingAdapterPosition();
+                SavedNameModel nameToDelete = everySavedName.get(positionOfItemToDelete);
+                databaseHelper.delete(nameToDelete);
+                everySavedName.remove(positionOfItemToDelete);
+                adapter.notifyItemRemoved(positionOfItemToDelete);
+            }
+        }).attachToRecyclerView(rv_saved_names);
+
+        //Button that prompts a dialog to appear, which asks if the user would like to delete all of their saved names from the SQLite database.
+        ImageView iv_to_delete_all = findViewById(R.id.ivToDeleteAll);
+        iv_to_delete_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
+            }
+        });
+
+        //Button to navigate to SavedNamesActivity, which is the saved names screen.
+        findViewById(R.id.ivNavToMainActivity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
+        //Ad on saved names screen.
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdView adView_main_banner = (AdView)findViewById(R.id.adViewSavedNamesBanner);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView_main_banner.loadAd(adRequest);
+    }
+
+    //Dialog for asking if the user wants to delete all of their saved names.
+    public void openDialog(){
+        Dialog dialog = new Dialog();
+        dialog.show(getSupportFragmentManager(), "Dialog");
+    }
+
+    //Method called in the Dialog class
+    public static void yesToDeleteAll(){
+        databaseHelper.deleteAll();
+        everySavedName.removeAll(everySavedName);
+//        savedNames = new ArrayList<>();
+
+        adapter.notifyDataSetChanged();
     }
 }
