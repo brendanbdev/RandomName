@@ -1,6 +1,5 @@
 package com.example.randomname;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,19 +13,9 @@ public class Dialog extends AppCompatDialogFragment {
     @Override
     public android.app.Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Delete All?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        SavedNamesActivity.yesToDeleteAll();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
+        builder.setTitle(R.string.deleteAllDialogTitle)
+                .setPositiveButton(getString(R.string.deleteAllPositiveButtonText), (dialog, which) -> SavedNamesActivity.yesToDeleteAll() )
+                .setNegativeButton(getString(R.string.deleteAllNegativeButtonText), (dialog, which) -> {} );
         return builder.create();
     }
 }

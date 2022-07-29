@@ -11,10 +11,6 @@ public class SavedNameModel {
         this.name = name;
     }
 
-    //toString is necessary for printing the contents of a class object
-    @Override
-    public String toString() { return name; }
-
     //getters and setters
     public int getId() {
         return id;

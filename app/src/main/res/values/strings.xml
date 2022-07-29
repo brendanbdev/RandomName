@@ -4,4 +4,7 @@
     <string name="saveButtonText">Save</string>
     <string name="nav_to_saved_names_text">Navigate to saved names.</string>
     <string name="iv_to_delete_all_description">Toggle ability to select items to delete.</string>
+    <string name="deleteAllDialogTitle">Delete All?</string>
+    <string name="deleteAllPositiveButtonText">Yes</string>
+    <string name="deleteAllNegativeButtonText">No</string>
 </resources>

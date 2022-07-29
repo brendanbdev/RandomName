@@ -67,9 +67,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 returnList.add(newSavedName);
             } while (cursor.moveToNext());
         }
-        else {
-            //Do nothing.
-        }
 
         cursor.close();
         sqLiteDatabase.close();
