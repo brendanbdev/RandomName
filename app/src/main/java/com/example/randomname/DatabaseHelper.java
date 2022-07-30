@@ -16,16 +16,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String NAME_TABLE = "CUSTOMER_TABLE";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_NAME = "NAME";
+    public static final int INSERTION_ERROR = -1;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, "name.sqLiteDatabase", null, 1);
     }
 
-    //This is called the first time a database is accessed. There should be code in here to create a new database.
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createTableStatement = "CREATE TABLE " + NAME_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " TEXT)";
-
         sqLiteDatabase.execSQL(createTableStatement);
     }
 
@@ -36,18 +35,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean addOne(SavedNameModel savedNameModel) {
-
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-
         contentValues.put(COLUMN_NAME, savedNameModel.getName());
-
-        long insert = sqLiteDatabase.insert(NAME_TABLE, null, contentValues);
-        if (insert == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        long rowID = sqLiteDatabase.insert(NAME_TABLE, null, contentValues);
+        return (rowID != INSERTION_ERROR);
     }
 
     public List<SavedNameModel> getAllNames() {
@@ -62,7 +54,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 int nameID = cursor.getInt(0);
                 String name = cursor.getString(1);
-
                 SavedNameModel newSavedName = new SavedNameModel(nameID, name);
                 returnList.add(newSavedName);
             } while (cursor.moveToNext());
@@ -74,34 +65,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public boolean delete(SavedNameModel savedNameModel) {
-        /*
-        Find customerModel in the database.
-        If it is found, delete it and return true.
-        If it is not, return false.
-        */
+    public void delete(SavedNameModel savedNameModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + NAME_TABLE + " WHERE " + COLUMN_ID + " = " + savedNameModel.getId();
-
-        Cursor cursor = db.rawQuery(queryString, null);
-
-        if (cursor.moveToFirst()) {
-            return true;
-        } else {
-            return false;
-        }
+        db.rawQuery(queryString, null).moveToFirst();
     }
 
-    public boolean deleteAll(){
+    public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + "CUSTOMER_TABLE";
-
-        Cursor cursor = db.rawQuery(queryString, null);
-
-        if (cursor.moveToFirst()) {
-            return true;
-        } else {
-            return false;
-        }
+        db.rawQuery(queryString, null).moveToFirst();
     }
 }

@@ -1,7 +1,6 @@
 package com.example.randomname;
 
 import android.os.Bundle;
-import android.view.View;
 
 import java.util.List;
 
@@ -16,15 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 public class SavedNamesActivity extends AppCompatActivity {
 
     private static DatabaseHelper databaseHelper;
     private static List<SavedNameModel> savedNames;
     //The adapter is for the Recycler View.
-    private static NameAdapter adapter;
+    private NameAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +56,21 @@ public class SavedNamesActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(rv_saved_names);
 
-        //Button that prompts a dialog to appear, which asks if the user would like to delete all of their saved names from the SQLite database.
         ImageView iv_to_delete_all = findViewById(R.id.ivToDeleteAll);
+
+        //This dialog will ask the user if they want to delete all of the saved random names.
         iv_to_delete_all.setOnClickListener(view -> openDialog());
 
-        //Button to navigate to SavedNamesActivity, which is the saved names screen.
+        //The SavedNameActivity finishes, and then the MainActivity will display again in the exact state that it was left.
         findViewById(R.id.ivNavToMainActivity).setOnClickListener(view -> finish());
 
-        //Ad on saved names screen.
         MobileAds.initialize(this, initializationStatus -> {
         });
+
         AdView adView_main_banner = findViewById(R.id.adViewSavedNamesBanner);
+
         AdRequest adRequest = new AdRequest.Builder().build();
+
         adView_main_banner.loadAd(adRequest);
     }
 
@@ -81,7 +81,7 @@ public class SavedNamesActivity extends AppCompatActivity {
     }
 
     //Method called in the Dialog class
-    public static void yesToDeleteAll(){
+    public void yesToDeleteAll(){
         databaseHelper.deleteAll();
         savedNames.removeAll(savedNames);
         adapter.notifyDataSetChanged();

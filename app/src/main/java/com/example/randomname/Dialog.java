@@ -14,8 +14,8 @@ public class Dialog extends AppCompatDialogFragment {
     public android.app.Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.deleteAllDialogTitle)
-                .setPositiveButton(getString(R.string.deleteAllPositiveButtonText), (dialog, which) -> SavedNamesActivity.yesToDeleteAll() )
-                .setNegativeButton(getString(R.string.deleteAllNegativeButtonText), (dialog, which) -> {} );
+                .setPositiveButton(getString(R.string.deleteAllPositiveButtonText), (dialog, which) -> ((SavedNamesActivity)getActivity()).yesToDeleteAll())
+                .setNegativeButton(getString(R.string.deleteAllNegativeButtonText), (dialog, which) -> {});
         return builder.create();
     }
 }

@@ -1,8 +1,7 @@
 package com.example.randomname;
 
 public class SavedNameModel {
-
-    private int id;
+    private final int id;
     private String name;
 
     //constructors
@@ -11,13 +10,14 @@ public class SavedNameModel {
         this.name = name;
     }
 
-    //getters and setters
     public int getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }

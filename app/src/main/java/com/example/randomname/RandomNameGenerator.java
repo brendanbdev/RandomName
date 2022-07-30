@@ -5,22 +5,22 @@ import java.util.Random;
 import java.lang.StringBuilder;
 
 public class RandomNameGenerator {
-    private static Random random = new Random();
-    private static String[] possibleFirstLetters = {"A", "E", "I", "O", "U", "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "R", "S", "T", "V", "W", "X", "Z", "Ch", "Ph", "Th", "Sh"};
-    private static String[] vowels = {"a", "e", "i", "o", "u"};
-    private static String[] consonants = {"b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "v", "w", "x", "z", "ch", "ph", "th", "sh"};
-    private static String[] lettersAfterConsonants = {"a", "e", "i", "o", "u", "l", "r"};
-    private static String[] lettersAfterLAndR = {"b", "c", "d", "f", "g", "h", "j", "k", "m", "n", "p", "t", "v", "w", "x", "z", "ch", "ph", "th", "sh", "a", "e", "i", "o", "u"};
-    private static String[] lettersAfterS = {"c", "m", "n", "p", "t", "w", "a", "e", "i", "o", "u"};
-    private static String[] possibleEndOfName = {"ael", "iel", "aul", "uel"};
+    private static final Random random = new Random();
+    private static final String[] possibleFirstLetters = {"A", "E", "I", "O", "U", "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "R", "S", "T", "V", "W", "X", "Z", "Ch", "Ph", "Th", "Sh"};
+    private static final String[] vowels = {"a", "e", "i", "o", "u"};
+    private static final String[] consonants = {"b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "v", "w", "x", "z", "ch", "ph", "th", "sh"};
+    private static final String[] lettersAfterConsonants = {"a", "e", "i", "o", "u", "l", "r"};
+    private static final String[] lettersAfterLAndR = {"b", "c", "d", "f", "g", "h", "j", "k", "m", "n", "p", "t", "v", "w", "x", "z", "ch", "ph", "th", "sh", "a", "e", "i", "o", "u"};
+    private static final String[] lettersAfterS = {"c", "m", "n", "p", "t", "w", "a", "e", "i", "o", "u"};
+    private static final String[] possibleEndOfName = {"ael", "iel", "aul", "uel"};
 
-    private static int NAME_LENGTH_VARIABLE = 5;
-    private static int MIN_MAX_BOUND = 4;
+    private static final int NAME_LENGTH_VARIABLE = 5;
+    private static final int MIN_MAX_BOUND = 4;
     //There is a 1 in 2 chance that a special ending will be added if the name's length is 4.
-    private static int PROBABILITY_OF_SPECIAL_ENDING = 2;
+    private static final int PROBABILITY_OF_SPECIAL_ENDING = 2;
 
-    private ArrayList<String> randomNameArrayList;
-    private StringBuilder randomNameStringBuilder;
+    private final ArrayList<String> randomNameArrayList;
+    private final StringBuilder randomNameStringBuilder;
 
     public RandomNameGenerator() {
         randomNameArrayList = new ArrayList<>();
@@ -29,7 +29,7 @@ public class RandomNameGenerator {
 
     public String getRandomName() {
 
-        //Reset the Array List and String Builder
+        //Resets the Array List and String Builder before using them again in this method.
         randomNameArrayList.clear();
         randomNameStringBuilder.delete(0,randomNameStringBuilder.length());
 
@@ -62,6 +62,7 @@ public class RandomNameGenerator {
         }
 
         int last_index = randomNameArrayList.size() - 1;
+
         if (nameLength == MIN_MAX_BOUND && letterAtIndexIsAConsonant(last_index) && shouldAddSpecialEnding()) {
             addLetterFrom(possibleEndOfName);
         }

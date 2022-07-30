@@ -16,24 +16,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
-        //button declarations
         TextView randomNameTextView = findViewById(R.id.randomNameTextView);
-        Button save_button = findViewById(R.id.saveButton);
 
-        //Button that calls RandomNameGenerator to generate a random name.
+        Button saveButton = findViewById(R.id.saveButton);
+
         findViewById(R.id.randomNameButton).setOnClickListener(view -> {
             RandomNameGenerator randomNameGenerator = new RandomNameGenerator();
             String randomName = randomNameGenerator.getRandomName();
-
             randomNameTextView.setText(randomName);
         });
 
-        //Button to save the name that is currently displaying, to the SQLite database.
-        save_button.setOnClickListener(view -> {
+        saveButton.setOnClickListener(view -> {
             if (!randomNameTextView.getText().toString().isEmpty()) {
                 SavedNameModel savedNameModel = new SavedNameModel(-1, randomNameTextView.getText().toString());
                 DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
@@ -47,17 +44,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Button to navigate to SavedNamesActivity, which is the saved names screen.
         findViewById(R.id.navToSavedNames).setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, SavedNamesActivity.class);
             startActivity(intent);
         });
 
-        //Ad on main screen.
         MobileAds.initialize(this, initializationStatus -> {
         });
+
         AdView adView_main_banner = findViewById(R.id.adViewMainBanner);
+
         AdRequest adRequest = new AdRequest.Builder().build();
+
         adView_main_banner.loadAd(adRequest);
     }
 }
