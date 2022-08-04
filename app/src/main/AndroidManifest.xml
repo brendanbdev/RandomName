@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="random.name.generator">
+    package="com.brendan.randomname">
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,7 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4801451584427946~2210374872"/>
         <activity
-            android:name="random.name.generator.MainActivity"
+            android:name="com.brendan.randomname.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="random.name.generator.SavedNamesActivity"
+            android:name="com.brendan.randomname.SavedNamesActivity"
             android:exported="true">
         </activity>
     </application>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context="random.name.generator.MainActivity">
+    tools:context="com.brendan.randomname.MainActivity">
 
     <TextView
         android:id="@+id/randomNameTextView"

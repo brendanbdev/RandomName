@@ -6,7 +6,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "random.name.generator"
+        applicationId "com.brendan.randomname"
         minSdk 30
         targetSdk 32
         versionCode 1
