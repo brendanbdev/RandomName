@@ -31,10 +31,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:adUnitId="ca-app-pub-4801451584427946/5664187117"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+<!--    ca-app-pub-3940256099942544/6300978111-->
 
     <ImageView
         android:id="@+id/ivNavToMainActivity"

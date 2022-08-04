@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Random Name</string>
+    <string name="app_name">RNG</string>
     <string name="randomNameButtonText">Random Name</string>
     <string name="saveButtonText">Save</string>
     <string name="nav_to_saved_names_text">Navigate to saved names.</string>
