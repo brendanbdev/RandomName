@@ -1,4 +1,4 @@
-package com.example.randomname;
+package random.name.generator;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package com.example.randomname;
+package random.name.generator;
 
 public class SavedNameModel {
     private final int id;

@@ -1,4 +1,4 @@
-package com.example.randomname;
+package random.name.generator;
 
 import android.os.Bundle;
 
@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import random.name.generator.R;
 
 public class Dialog extends AppCompatDialogFragment {
 

@@ -1,4 +1,4 @@
-package com.example.randomname;
+package random.name.generator;
 
 import android.content.ContentValues;
 import android.content.Context;
