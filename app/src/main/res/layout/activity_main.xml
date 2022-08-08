@@ -64,7 +64,7 @@
         android:contentDescription="@string/nav_to_saved_names_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/adViewMainBanner"
-        app:srcCompat="@drawable/outline_navigate_next_black_18" />
+        app:srcCompat="@drawable/outline_navigate_next_black_48" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewMainBanner"

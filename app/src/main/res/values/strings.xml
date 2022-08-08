@@ -7,5 +7,5 @@
     <string name="deleteAllDialogTitle">Delete All?</string>
     <string name="deleteAllPositiveButtonText">Yes</string>
     <string name="deleteAllNegativeButtonText">No</string>
-    <string name="button_to_navigate_back_to_the_home_screen">Button to navigate back to the home screen.</string>
+    <string name="button_to_navigate_back_to_the_home_screen">Navigate back to the home screen.</string>
 </resources>
