@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context="com.brendan.randomname.MainActivity">
 
     <TextView
@@ -13,7 +12,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:freezesText="true"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@id/randomNameButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,13 +24,13 @@
         style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="?android:attr/textColorPrimary"
         android:clickable="true"
         android:fontFamily="sans-serif-light"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="@string/randomNameButtonText"
-        android:textColor="#FFFFFF"
+        android:textColor="?attr/colorSurface"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +47,7 @@
         android:fontFamily="sans-serif-light"
         android:outlineProvider="none"
         android:text="@string/saveButtonText"
-        android:textColor="#000000"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,21 +58,22 @@
         android:id="@+id/navToSavedNames"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:clickable="true"
         android:contentDescription="@string/nav_to_saved_names_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/adViewMainBanner"
-        app:srcCompat="@drawable/outline_navigate_next_black_48" />
+        app:srcCompat="@drawable/outline_navigate_next_black_48"
+        app:tint="?android:attr/textColorPrimary" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewMainBanner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-4801451584427946/6223957292"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-4801451584427946/6223957292"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

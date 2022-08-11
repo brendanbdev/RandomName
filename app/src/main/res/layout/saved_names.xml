@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adViewSavedNamesBanner"
         app:srcCompat="@android:drawable/ic_menu_delete"
-        app:tint="@color/black" />
+        app:tint="?android:attr/textColorPrimary" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewSavedNamesBanner"
@@ -56,10 +56,11 @@
         android:layout_margin="8dp"
         android:clickable="true"
         android:rotation="180"
+        android:contentDescription="@string/button_to_navigate_back_to_the_home_screen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adViewSavedNamesBanner"
         app:srcCompat="@drawable/outline_navigate_next_black_48"
-        android:contentDescription="@string/button_to_navigate_back_to_the_home_screen" />
+        app:tint="?android:attr/textColorPrimary" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
