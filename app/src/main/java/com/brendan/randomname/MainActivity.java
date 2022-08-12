@@ -1,14 +1,16 @@
 package com.brendan.randomname;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.brendan.randomname.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -29,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
             RandomNameGenerator randomNameGenerator = new RandomNameGenerator();
             String randomName = randomNameGenerator.getRandomName();
             randomNameTextView.setText(randomName);
+        });
+
+        findViewById(R.id.randomNameTextView).setOnLongClickListener(view -> {
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText(randomNameTextView.getText() + " copied.", randomNameTextView.getText());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(MainActivity.this, randomNameTextView.getText() + " copied.", Toast.LENGTH_SHORT).show();
+            return true;
         });
 
         saveButton.setOnClickListener(view -> {

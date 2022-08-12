@@ -1,15 +1,16 @@
 package com.brendan.randomname;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.brendan.randomname.R;
 
 import java.util.List;
 
@@ -46,6 +47,13 @@ public class NameAdapter extends RecyclerView.Adapter<NameAdapter.MyViewHolder> 
         public MyViewHolder(View itemView) {
             super(itemView);
             savedNameTextView = itemView.findViewById(R.id.tvSavedName);
+            itemView.setOnLongClickListener(v -> {
+                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText(savedNameTextView.getText() + " copied.", savedNameTextView.getText());
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(context, savedNameTextView.getText() + " copied.", Toast.LENGTH_SHORT).show();
+                return true;
+            });
         }
     }
 }

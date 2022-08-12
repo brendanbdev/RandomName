@@ -14,6 +14,8 @@
         android:freezesText="true"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="32sp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
         app:layout_constraintBottom_toTopOf="@id/randomNameButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,24 +37,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/randomNameTextView" />
+        app:layout_constraintTop_toBottomOf="@id/randomNameTextView"
+        app:rippleColor="?attr/colorSurface" />
 
     <Button
         android:id="@+id/saveButton"
         style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:backgroundTint="#00FFFFFF"
+        android:backgroundTint="?attr/colorSurface"
         android:clickable="true"
         android:fontFamily="sans-serif-light"
         android:outlineProvider="none"
         android:text="@string/saveButtonText"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="32sp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/randomNameButton" />
+        app:layout_constraintTop_toBottomOf="@+id/randomNameButton"
+        app:rippleColor="?android:attr/textColorPrimary" />
 
     <ImageView
         android:id="@+id/navToSavedNames"
@@ -61,6 +66,7 @@
         android:layout_margin="8dp"
         android:clickable="true"
         android:contentDescription="@string/nav_to_saved_names_text"
+        android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/adViewMainBanner"
         app:srcCompat="@drawable/outline_navigate_next_black_48"
