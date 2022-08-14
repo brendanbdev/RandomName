@@ -2,16 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.brendan.randomname">
 
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/random_name_launcher_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/random_name_launcher_icon_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.RandomName">
+        android:theme="@style/Theme.App.Starting">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4801451584427946~2210374872"/>
+            android:value="ca-app-pub-4801451584427946~2210374872" />
         <activity
             android:name="com.brendan.randomname.MainActivity"
             android:exported="true">
@@ -22,7 +23,8 @@
         </activity>
         <activity
             android:name="com.brendan.randomname.SavedNamesActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.RandomName">
         </activity>
     </application>
 

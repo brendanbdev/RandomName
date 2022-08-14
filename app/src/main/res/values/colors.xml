@@ -8,4 +8,5 @@
     <color name="semi_dark_gray">#555555</color>
     <color name="gray">#7F7F7F</color>
     <color name="transparent_black">#BF000000</color>
+    <color name="dark">#121212</color>
 </resources>
