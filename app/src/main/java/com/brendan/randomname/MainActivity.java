@@ -16,7 +16,15 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    static ArrayList<String> existingSavedNames = new ArrayList<>();
+
+    public static ArrayList<String> getExistingSavedNames() {
+        return existingSavedNames;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +53,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         saveButton.setOnClickListener(view -> {
+
             if (!randomNameTextView.getText().toString().isEmpty()) {
                 SavedNameModel savedNameModel = new SavedNameModel(-1, randomNameTextView.getText().toString());
-                DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
-                boolean success = databaseHelper.addOne(savedNameModel);
-                if (success) {
-                    String toastText = savedNameModel.getName() + " was saved";
+                if(existingSavedNames.contains(randomNameTextView.getText().toString())) {
+                    String toastText = savedNameModel.getName() + " is already saved.";
                     Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity.this, "There was an error, and nothing was saved.", Toast.LENGTH_SHORT).show();
+                    DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
+                    boolean success = databaseHelper.addOne(savedNameModel);
+                    if (success) {
+                        String toastText = savedNameModel.getName() + " was saved.";
+                        Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
+                        existingSavedNames.add(savedNameModel.getName());
+                    } else {
+                        Toast.makeText(MainActivity.this, "There was an error, and nothing was saved.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

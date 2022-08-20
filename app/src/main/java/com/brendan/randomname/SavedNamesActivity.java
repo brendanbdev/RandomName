@@ -1,9 +1,6 @@
 package com.brendan.randomname;
 
 import android.os.Bundle;
-
-import java.util.List;
-
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -12,15 +9,18 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.brendan.randomname.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SavedNamesActivity extends AppCompatActivity {
 
     private static DatabaseHelper databaseHelper;
     private static List<SavedNameModel> savedNames;
+    ArrayList<String> existingSavedNames = MainActivity.getExistingSavedNames();
     //The adapter is for the Recycler View.
     private NameAdapter adapter;
 
@@ -54,13 +54,18 @@ public class SavedNamesActivity extends AppCompatActivity {
                 databaseHelper.delete(nameToDelete);
                 savedNames.remove(positionOfItemToDelete);
                 adapter.notifyItemRemoved(positionOfItemToDelete);
+                existingSavedNames.remove(nameToDelete.getName());
             }
         }).attachToRecyclerView(rv_saved_names);
 
         ImageView iv_to_delete_all = findViewById(R.id.ivToDeleteAll);
 
         //This dialog will ask the user if they want to delete all of the saved random names.
-        iv_to_delete_all.setOnClickListener(view -> openDialog());
+        iv_to_delete_all.setOnClickListener(view -> {
+            if(!savedNames.isEmpty()) {
+                openDialog();
+            }
+        });
 
         //The SavedNameActivity finishes, and then the MainActivity will display again in the exact state that it was left.
         findViewById(R.id.ivNavToMainActivity).setOnClickListener(view -> finish());
@@ -86,5 +91,6 @@ public class SavedNamesActivity extends AppCompatActivity {
         databaseHelper.deleteAll();
         savedNames.removeAll(savedNames);
         adapter.notifyDataSetChanged();
+        existingSavedNames.clear();
     }
 }
