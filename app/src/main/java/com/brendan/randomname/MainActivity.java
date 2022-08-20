@@ -19,7 +19,6 @@ import com.google.android.gms.ads.MobileAds;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
     static ArrayList<String> existingSavedNames = new ArrayList<>();
 
     public static ArrayList<String> getExistingSavedNames() {
@@ -53,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         saveButton.setOnClickListener(view -> {
-
             if (!randomNameTextView.getText().toString().isEmpty()) {
                 SavedNameModel savedNameModel = new SavedNameModel(-1, randomNameTextView.getText().toString());
                 if(existingSavedNames.contains(randomNameTextView.getText().toString())) {

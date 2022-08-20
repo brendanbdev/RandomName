@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class NameAdapter extends RecyclerView.Adapter<NameAdapter.MyViewHolder> {
-
     Context context;
     List<SavedNameModel> listOfNames;
 

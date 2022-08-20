@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SavedNamesActivity extends AppCompatActivity {
-
     private static DatabaseHelper databaseHelper;
     private static List<SavedNameModel> savedNames;
     ArrayList<String> existingSavedNames = MainActivity.getExistingSavedNames();
