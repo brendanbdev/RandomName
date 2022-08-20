@@ -37,19 +37,9 @@
         android:padding="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adViewSavedNamesBanner"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_delete"
         app:tint="?android:attr/textColorPrimary" />
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adViewSavedNamesBanner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-4801451584427946/5664187117"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ivNavToMainActivity"
@@ -61,7 +51,7 @@
         android:contentDescription="@string/button_to_navigate_back_to_the_home_screen"
         android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adViewSavedNamesBanner"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outline_navigate_next_black_48"
         app:tint="?android:attr/textColorPrimary" />
 

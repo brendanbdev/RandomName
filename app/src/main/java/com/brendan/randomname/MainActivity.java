@@ -12,10 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,14 +71,5 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SavedNamesActivity.class);
             startActivity(intent);
         });
-
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-
-        AdView adView_main_banner = findViewById(R.id.adViewMainBanner);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        adView_main_banner.loadAd(adRequest);
     }
 }

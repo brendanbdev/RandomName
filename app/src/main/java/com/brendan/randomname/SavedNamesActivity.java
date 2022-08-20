@@ -9,10 +9,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,15 +64,6 @@ public class SavedNamesActivity extends AppCompatActivity {
 
         //The SavedNameActivity finishes, and then the MainActivity will display again in the exact state that it was left.
         findViewById(R.id.ivNavToMainActivity).setOnClickListener(view -> finish());
-
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-
-        AdView adView_main_banner = findViewById(R.id.adViewSavedNamesBanner);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        adView_main_banner.loadAd(adRequest);
     }
 
     //Dialog for asking if the user wants to delete all of their saved names.

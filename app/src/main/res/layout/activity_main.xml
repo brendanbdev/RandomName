@@ -19,7 +19,7 @@
         app:layout_constraintBottom_toTopOf="@id/randomNameButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adViewMainBanner" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/randomNameButton"
@@ -68,18 +68,8 @@
         android:contentDescription="@string/nav_to_saved_names_text"
         android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/adViewMainBanner"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outline_navigate_next_black_48"
         app:tint="?android:attr/textColorPrimary" />
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adViewMainBanner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-4801451584427946/6223957292"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
