@@ -48,7 +48,10 @@ public class RandomNameGenerator {
         }
 
         while(randomNameArrayList.size() < nameLength) {
-            if (lastLetterIsAVowel()) {
+            int randomNameWaitingForOneMoreLetter = randomNameArrayList.size() + 1;
+            if (randomNameWaitingForOneMoreLetter == nameLength && lastLetterIsAConsonant()) {
+                addLetterFrom(vowels);
+            } else if (lastLetterIsAVowel()) {
                 addLetterFrom(consonants);
             } else if(secondToLastLetterIsAConsonant()) {
                 addLetterFrom(vowels);
@@ -61,9 +64,9 @@ public class RandomNameGenerator {
             }
         }
 
-        int last_index = randomNameArrayList.size() - 1;
+        int lastIndex = randomNameArrayList.size() - 1;
 
-        if (nameLength == MIN_MAX_BOUND && letterAtIndexIsAConsonant(last_index) && shouldAddSpecialEnding()) {
+        if (nameLength == MIN_MAX_BOUND && letterAtIndexIsAConsonant(lastIndex) && shouldAddSpecialEnding()) {
             addLetterFrom(possibleEndOfName);
         }
 
@@ -82,6 +85,10 @@ public class RandomNameGenerator {
 
     private boolean secondToLastLetterIsAConsonant() {
         return letterAtIndexIsAConsonant(randomNameArrayList.size() - 2);
+    }
+
+    private boolean lastLetterIsAConsonant() {
+        return letterAtIndexIsAConsonant(randomNameArrayList.size() - 1);
     }
 
     private boolean firstLetterIsAVowel() {
