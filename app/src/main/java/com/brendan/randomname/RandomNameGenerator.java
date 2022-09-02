@@ -48,8 +48,7 @@ public class RandomNameGenerator {
         }
 
         while(randomNameArrayList.size() < nameLength) {
-            int randomNameWaitingForOneMoreLetter = randomNameArrayList.size() + 1;
-            if (randomNameWaitingForOneMoreLetter == nameLength && lastLetterIsAConsonant()) {
+            if (randomNameArrayList.size() + 1 == nameLength && lastLetterIsAConsonant()) {
                 addLetterFrom(vowels);
             } else if (lastLetterIsAVowel()) {
                 addLetterFrom(consonants);
