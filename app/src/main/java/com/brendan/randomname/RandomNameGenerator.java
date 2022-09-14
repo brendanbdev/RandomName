@@ -4,8 +4,44 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.lang.StringBuilder;
 
-public class RandomNameGenerator {
+interface RandomGen {
+    int getRandomInt(int upperBound);
+}
+
+class MockRandomGen implements RandomGen {
+    private int[] nextValues = {};
+
+    public void setNextValues(int[] nextValues) {
+        this.nextValues = nextValues;
+    }
+
+    public int getRandomInt(int upperBound) {
+        // TODO: Should only return a value that is smaller than or equal to the upperBound passed in.
+
+        if (nextValues.length == 0) {
+            throw new IndexOutOfBoundsException("The getRandomInt() method was called with no nextValues available. Call setNextValues() to provide some.");
+        }
+
+        int nextValue = nextValues[0];
+
+        for (int i = 1; i < nextValues.length; i++) {
+            nextValues[i-1] = nextValues[i];
+        }
+        return nextValue;
+    }
+}
+
+class RealRandomGen implements RandomGen {
     private static final Random random = new Random();
+
+    public int getRandomInt(int upperBound) {
+        return random.nextInt(upperBound);
+    }
+}
+
+
+public class RandomNameGenerator {
+    private final RandomGen randomGen;
     private static final String[] possibleFirstLetters = {"A", "E", "I", "O", "U", "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "R", "S", "T", "V", "W", "X", "Z", "Ch", "Ph", "Th", "Sh"};
     private static final String[] vowels = {"a", "e", "i", "o", "u"};
     private static final String[] consonants = {"b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "v", "w", "x", "z", "ch", "ph", "th", "sh"};
@@ -25,15 +61,22 @@ public class RandomNameGenerator {
     public RandomNameGenerator() {
         randomNameArrayList = new ArrayList<>();
         randomNameStringBuilder = new StringBuilder();
+        randomGen = new RealRandomGen();
+    }
+
+    public RandomNameGenerator(RandomGen randomGen) {
+        randomNameArrayList = new ArrayList<>();
+        randomNameStringBuilder = new StringBuilder();
+        this.randomGen = randomGen;
     }
 
     public String getRandomName() {
 
         //Resets the Array List and String Builder before using them again in this method.
         randomNameArrayList.clear();
-        randomNameStringBuilder.delete(0,randomNameStringBuilder.length());
+        randomNameStringBuilder.delete(0, randomNameStringBuilder.length());
 
-        int nameLength = random.nextInt(NAME_LENGTH_VARIABLE) + MIN_MAX_BOUND;
+        int nameLength = randomGen.getRandomInt(NAME_LENGTH_VARIABLE) + MIN_MAX_BOUND;
 
         addLetterFrom(possibleFirstLetters);
 
@@ -69,7 +112,7 @@ public class RandomNameGenerator {
             addLetterFrom(possibleEndOfName);
         }
 
-        for (String i : randomNameArrayList) {randomNameStringBuilder.append(i);}
+        for (String i : randomNameArrayList) { randomNameStringBuilder.append(i); }
 
         return randomNameStringBuilder.toString();
     }
@@ -117,10 +160,10 @@ public class RandomNameGenerator {
     }
 
     private void addLetterFrom(String[] options) {
-        randomNameArrayList.add(options[random.nextInt(options.length)]);
+        randomNameArrayList.add(options[randomGen.getRandomInt(options.length)]);
     }
 
-    private static boolean shouldAddSpecialEnding() {
-        return random.nextInt(PROBABILITY_OF_SPECIAL_ENDING) == 0;
+    private boolean shouldAddSpecialEnding() {
+        return randomGen.getRandomInt(PROBABILITY_OF_SPECIAL_ENDING) == 0;
     }
 }
