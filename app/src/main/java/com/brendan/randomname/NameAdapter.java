@@ -14,11 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/* The NameAdapter class is for the Recycler View.
+It takes objects from a list created in DatabaseHelper
+and adapts each object into items on a Recycler View list. */
 public class NameAdapter extends RecyclerView.Adapter<NameAdapter.MyViewHolder> {
     Context context;
     List<SavedNameModel> listOfNames;
 
-    public NameAdapter( List<SavedNameModel> listOfNames, Context context) {
+    public NameAdapter(List<SavedNameModel> listOfNames, Context context) {
         this.context = context;
         this.listOfNames = listOfNames;
     }

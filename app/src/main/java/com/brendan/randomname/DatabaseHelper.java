@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createTableStatement);
     }
 
-    //This is called if the database version changes. It prevents previous users apps from breaking when you change the database design.
+    // This is called if the database version changes. It prevents previous users apps from breaking when you change the database design.
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
@@ -43,13 +43,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public List<SavedNameModel> getAllNames() {
         List<SavedNameModel> returnList = new ArrayList<>();
-        //get data from the database
+        // Get data from the database.
         String queryString = "SELECT * FROM " + NAME_TABLE;
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(queryString, null);
 
         if (cursor.moveToFirst()) {
-            // loop through the cursor (result set) and create new customer objects, then put them into the return list.
+            // Loop through the cursor (result set) and create new customer objects, then put them into the return list.
             do {
                 int nameID = cursor.getInt(0);
                 String name = cursor.getString(1);
